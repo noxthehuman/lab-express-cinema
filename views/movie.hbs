@@ -6,9 +6,14 @@
     <p> Director: {{movie.director}} </p>
     <p> Stars</p>
     <ul> 
-        <li> {{movie.stars}} </li>
+        {{#each movie.stars}}
+            <li> {{this}} </li>
+        {{/each}}
     </ul>
     <p> {{movie.description}} </p>
-    <p> {{movie.showtimes}} </p>
+    <p> {{#each movie.showtimes}} 
+        {{this}} || 
+        {{/each}}
+    </p>
 
 </div>

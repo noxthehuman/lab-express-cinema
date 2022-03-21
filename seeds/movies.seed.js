@@ -1,3 +1,7 @@
+require('../db');
+const Movies = require('../models/Movie.model');
+const mongoose = require('mongoose')
+
 const movies = [
     {
       title: "A Wrinkle in Time",
@@ -81,4 +85,16 @@ const movies = [
     }
   ];
 
+async function seedMovies() {
+  try {
+    await Movies.deleteMany()
+    await Movies.insertMany(movies)
+    await mongoose.connection.close()
+  }
+  catch(error) {
+    console.log(error)
+  }
+}
+
+seedMovies()
   

@@ -1,12 +1,15 @@
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const Movie = new Schema(() => {
-    title = String,
-    director = String,
-    stars = [String],
-    image = String,
-    description = String,
-    showtimes = [String]
+const MovieSchema = new Schema({
+    title: String,
+    director: String,
+    stars: [String],
+    image: String,
+    description: String,
+    showtimes: [String]
 })
 
-export { Movie }
+const Movies = mongoose.model('Movies', MovieSchema);
+
+module.exports = Movies;

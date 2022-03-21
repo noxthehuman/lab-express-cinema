@@ -12,6 +12,7 @@ const express = require('express');
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 const hbs = require('hbs');
+const Movie = require('./models/Movie.model');
 
 const app = express();
 
@@ -27,6 +28,19 @@ app.locals.title = `${capitalized(projectName)}- Generated with Ironlauncher`;
 // 👇 Start handling routes here
 const index = require('./routes/index');
 app.use('/', index);
+
+app.get('/movies', async (req, res) => {
+    const movies = await Movie.find()
+    res.render('movies',{movies})
+})
+
+app.get('/movies/:id', async (req, res) => {
+    const id = req.params.id
+    console.log(req.params.id)
+    const movie = await Movie.findById(id)
+
+    res.render('movie', {movie} )
+})
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
